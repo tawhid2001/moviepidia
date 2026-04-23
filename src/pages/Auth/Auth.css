@@ -1,0 +1,103 @@
+.login {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/background.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.login-form {
+  width: 100%;
+  max-width: 450px;
+  background: var(--bg-card);
+  border-radius: 8px;
+  margin: 80px;
+  padding: 60px 68px 40px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.login-form h1 {
+  font-size: 32px;
+  font-weight: 500;
+  margin-bottom: 28px;
+  color: var(--text-main);
+}
+
+.login-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.login-form input {
+  height: 50px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  padding: 16px 20px;
+  font-size: 16px;
+  color: var(--text-main);
+  outline: none;
+}
+
+.login-form input::placeholder {
+  color: var(--text-soft);
+}
+
+.login-form input:focus {
+  border-color: var(--primary);
+}
+
+.login-form button {
+  height: 50px;
+  background: var(--primary);
+  border: none;
+  border-radius: 4px;
+  color: var(--text-main);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 24px;
+  transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+  background: var(--primary-light);
+}
+
+.form-switch {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.form-switch p {
+  font-size: 16px;
+  color: var(--text-soft);
+}
+
+.form-switch span {
+  color: var(--text-main);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.form-switch span:hover {
+  text-decoration: underline;
+}
+
+.login-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.login-spinner img {
+  width: 60px;
+  height: 60px;
+}

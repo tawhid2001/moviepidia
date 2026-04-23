@@ -1,0 +1,36 @@
+.movie-card {
+    background-color: var(--bg-card);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.movie-card:hover {
+    transform: translateY(-5px);
+}
+
+.movie-card__poster {
+    width: 100%;
+    object-fit: cover;
+}
+
+.movie-card__info {
+    padding: 1rem;
+}
+
+.movie-card__title {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.movie-card__year {
+    color: var(--text-soft);
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+}
+
+.movie-card__type {
+    color: var(--text-soft);
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+}
