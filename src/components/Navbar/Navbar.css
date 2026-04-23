@@ -84,3 +84,40 @@
     font-size: 16px;
     margin-right: 15px;
 }
+
+.menu-icon {
+  display: none;
+  cursor: pointer;
+  color: var(--text-main);
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  .menu-icon {
+    display: block;
+  }
+
+  .navbar-right {
+    position: absolute;
+    top: 70px;
+    height: 100vh;
+    right: 0;
+    background: var(--bg-card);
+    width: 200px;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 15px;
+    transform: translateX(100%);
+    transition: 0.3s;
+  }
+
+  .auth-links {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .navbar-right.active {
+    transform: translateX(0);
+  }
+}

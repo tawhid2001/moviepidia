@@ -3,8 +3,12 @@ import "./Navbar.css";
 import logo from "../../assets/clapperboard.svg";
 import { Link } from "react-router-dom";
 import { logout } from "../../services/auth.js";
+import { Menu, X} from "lucide-react";
+import { useState } from "react";
 
 const Navbar = ({ user }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <div className="navbar">
       <div className="navbar-left">
@@ -14,7 +18,11 @@ const Navbar = ({ user }) => {
         </Link>
       </div>
 
-      <div className="navbar-right">
+      <div className="menu-icon" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+      {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+    </div>
+
+      <div className={`navbar-right ${isMenuOpen ? "active" : ""}`}>
         {user ? (
           <>
             <span className="user-name">Welcome, {user.email}</span>
