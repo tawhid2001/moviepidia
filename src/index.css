@@ -24,3 +24,12 @@ body {
   color: var(--text-main);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+.custom-toast {
+  background: var(--bg-card);
+  color: var(--text-main);
+}
+
+.custom-progress {
+  background: var(--primary) !important;
+}
