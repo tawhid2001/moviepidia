@@ -3,6 +3,7 @@ import "./SearchResults.css";
 import MovieCard from "../../components/MovieCard/MovieCard.jsx";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
+import SearchForm from "../../components/SearchForm/SearchForm.jsx";
 
 const SearchResults = () => {
   const [results, setResults] = useState([]);
@@ -43,6 +44,7 @@ const SearchResults = () => {
 
   return (
     <div className="search-results">
+      <SearchForm query={query} />
       <h1 className="search-results-title">Search Results for "{query}"</h1>
       <div className="search-results-grid">
         {loading ? (
