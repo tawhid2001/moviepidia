@@ -40,7 +40,7 @@ function App() {
         toastClassName="custom-toast"
         progressClassName="custom-progress"
       />
-      <Navbar user={user} />
+      <Navbar user={user} authLoaded={authLoaded} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route

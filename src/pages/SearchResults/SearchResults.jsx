@@ -15,6 +15,28 @@ const SearchResults = () => {
   const query = searchParams.get("query");
 
 
+  function movieCardSkeleton() {
+    return (
+      Array.from({ length: 10 }, (_, i) => (
+            <div key={i} className="movie-card skeleton">
+              <div className="skeleton-poster"></div>
+              <div className="skeleton-content">
+                <div className="skeleton skeleton-title"></div>
+                <div className="skeleton skeleton-text"></div>
+                <div className="skeleton skeleton-text"></div>
+              </div>
+            </div>
+          ))
+    )
+  }
+
+  function renderMovieCards() {
+    return results.map((movie) => (
+            <MovieCard key={movie.imdbID} movie={movie} />
+          ))
+  }
+
+
   useEffect(() => {
     const fetchResults = async () => {
       setLoading(true);
@@ -48,20 +70,9 @@ const SearchResults = () => {
       <h1 className="search-results-title">Search Results for "{query}"</h1>
       <div className="search-results-grid">
         {loading ? (
-          Array.from({ length: 10 }, (_, i) => (
-            <div key={i} className="movie-card skeleton">
-              <div className="skeleton-poster"></div>
-              <div className="skeleton-content">
-                <div className="skeleton skeleton-title"></div>
-                <div className="skeleton skeleton-text"></div>
-                <div className="skeleton skeleton-text"></div>
-              </div>
-            </div>
-          ))
+          movieCardSkeleton()
         ) : (
-          results.map((movie) => (
-            <MovieCard key={movie.imdbID} movie={movie} />
-          ))
+          renderMovieCards()
         )}
       </div>
 

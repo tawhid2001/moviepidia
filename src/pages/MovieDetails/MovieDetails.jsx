@@ -11,27 +11,8 @@ const MovieDetails = () => {
   const [movie, setMovie] = useState({});
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchMovieDetails = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get(
-          `https://www.omdbapi.com/?apikey=${import.meta.env.VITE_APIKEY_OMDB}&i=${id}`,
-        );
-        setMovie(response.data);
-      } catch (error) {
-        console.error("Error fetching movie details:", error);
-        setMovie({});
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchMovieDetails();
-  }, [id]);
-
-  return (
-    loading ? (
+  function renderLoader() {
+    return (
       <div className="movie-details skeleton-container">
         <div className="skeleton skeleton-poster"></div>
         <div className="skeleton-content">
@@ -45,7 +26,11 @@ const MovieDetails = () => {
           <div className="skeleton skeleton-plot"></div>
         </div>
       </div>
-    ) : (
+    ) 
+  }
+
+  function renderMovieDetails() {
+    return (
       <div className="movie-details">
         <div className="back-icon" onClick={() => navigate(-1)}>
           <img src={backIcon} alt="Back" />
@@ -118,6 +103,29 @@ const MovieDetails = () => {
         </div>
       </div>
     )
+  }
+
+  useEffect(() => {
+    const fetchMovieDetails = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(
+          `https://www.omdbapi.com/?apikey=${import.meta.env.VITE_APIKEY_OMDB}&i=${id}`,
+        );
+        setMovie(response.data);
+      } catch (error) {
+        console.error("Error fetching movie details:", error);
+        setMovie({});
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMovieDetails();
+  }, [id]);
+
+  return (
+    loading ? renderLoader() : renderMovieDetails()
   );
 };
 
