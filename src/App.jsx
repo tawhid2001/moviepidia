@@ -11,6 +11,7 @@ import { Navigate } from "react-router-dom";
 import { auth } from "./firebase.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Favorites from "./pages/Favorites/Favorites.jsx";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -47,11 +48,19 @@ function App() {
           path="/search"
           element={
             <ProtectedRoute user={user}>
-              <SearchResults />
+              <SearchResults user={user} />
             </ProtectedRoute>
           }
         />
         <Route path="/movie/:id" element={<MovieDetails />} />
+        <Route
+          path="/favorites"
+          element={
+            <ProtectedRoute user={user}>
+              <Favorites user={user} />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/auth" element={<Auth />} />
       </Routes>
       <Footer />

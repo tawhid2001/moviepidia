@@ -1,12 +1,20 @@
 import React from "react";
 import "./MovieCard.css";
 import { useNavigate } from "react-router-dom";
+import { Heart } from "lucide-react"
 
-const MovieCard = ({ movie }) => {
+
+const MovieCard = ({ movie, isFavorite = false, onToggleFavorite }) => {
   const navigate = useNavigate();
 
   return (
     <div className="movie-card" onClick={() => navigate(`/movie/${movie.imdbID}`)}>
+      <button className={`favorite-button ${isFavorite ? 'is-favorite' : ''}`} onClick={(event) => {
+        event.stopPropagation();
+        onToggleFavorite(movie);
+      }}>
+        <Heart size={20} fill={isFavorite ? "currentColor" : "none"} />
+      </button>
       <img
         className="movie-card__poster"
         src={movie.Poster}

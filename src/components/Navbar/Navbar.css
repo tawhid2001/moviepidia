@@ -126,6 +126,12 @@
   height: 36px;
 }
 
+.fav{
+  color: var(--primary);
+  text-decoration: none;
+  padding: 16px;
+}
+
 
 @keyframes skeleton-loading {
   from {

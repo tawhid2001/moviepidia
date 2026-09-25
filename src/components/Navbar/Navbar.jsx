@@ -24,6 +24,7 @@ const Navbar = ({ user, authLoaded }) => {
         Welcome, <span className="user-name" data-email={user.email}>
           {user.email[0].toUpperCase()}
         </span>
+        <Link className="fav" to="/favorites">Favorites</Link>
         <button className="logout-btn" onClick={logout}>
           Logout
         </button>

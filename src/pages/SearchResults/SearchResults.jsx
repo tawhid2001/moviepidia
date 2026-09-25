@@ -4,8 +4,9 @@ import MovieCard from "../../components/MovieCard/MovieCard.jsx";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import SearchForm from "../../components/SearchForm/SearchForm.jsx";
+import useFavorites from "../../hooks/useFavorites";
 
-const SearchResults = () => {
+const SearchResults = ({ user }) => {
   const [results, setResults] = useState([]);
   const [page, setPage] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
@@ -13,6 +14,7 @@ const SearchResults = () => {
   const totalPages = Math.ceil(totalResults / 10);
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query");
+  const {isFavorite, toggleFavorite} = useFavorites(user);
 
 
   function movieCardSkeleton() {
@@ -32,7 +34,7 @@ const SearchResults = () => {
 
   function renderMovieCards() {
     return results.map((movie) => (
-            <MovieCard key={movie.imdbID} movie={movie} />
+            <MovieCard key={movie.imdbID} movie={movie} isFavorite={isFavorite(movie.imdbID)} onToggleFavorite={toggleFavorite}/>
           ))
   }
 
