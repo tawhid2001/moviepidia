@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import backIcon from "../../assets/circle-arrow-left.svg";
 
-
 const MovieDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -25,14 +24,21 @@ const MovieDetails = () => {
           <div className="mb-3 h-5 w-[90%] animate-pulse rounded-lg bg-gray-700"></div>
         </div>
       </div>
-    ) 
+    );
   }
 
   function renderMovieDetails() {
     return (
-      <div className="relative mx-auto grid max-w-[1000px] grid-cols-1 items-start gap-10 px-5 pb-20 pt-32 md:grid-cols-[280px_1fr] md:px-20">
-        <div className="absolute left-[15px] top-24 mt-5" onClick={() => navigate(-1)}>
-          <img className="size-5 cursor-pointer invert" src={backIcon} alt="Back" />
+      <div className="relative mx-auto grid max-w-250 grid-cols-1 items-start gap-10 px-5 pb-20 pt-32 md:grid-cols-[280px_1fr] md:px-20">
+        <div
+          className="absolute left-3.75 top-24 mt-5 "
+          onClick={() => navigate(-1)}
+        >
+          <img
+            className="cursor-pointer invert w-full h-8"
+            src={backIcon}
+            alt="Back"
+          />
         </div>
 
         {movie.Poster && movie.Poster !== "N/A" && (
@@ -92,7 +98,10 @@ const MovieDetails = () => {
               <strong>Ratings:</strong>
               <ul className="mt-2.5 list-none p-0">
                 {movie.Ratings.map((rating) => (
-                  <li className="mb-1.5" key={`${rating.Source}-${rating.Value}`}>
+                  <li
+                    className="mb-1.5"
+                    key={`${rating.Source}-${rating.Value}`}
+                  >
                     {rating.Source}: {rating.Value}
                   </li>
                 ))}
@@ -101,7 +110,7 @@ const MovieDetails = () => {
           )}
         </div>
       </div>
-    )
+    );
   }
 
   useEffect(() => {
@@ -123,9 +132,7 @@ const MovieDetails = () => {
     fetchMovieDetails();
   }, [id]);
 
-  return (
-    loading ? renderLoader() : renderMovieDetails()
-  );
+  return loading ? renderLoader() : renderMovieDetails();
 };
 
 export default MovieDetails;
