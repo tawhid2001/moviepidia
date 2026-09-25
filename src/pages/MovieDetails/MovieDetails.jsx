@@ -31,7 +31,7 @@ const MovieDetails = () => {
     return (
       <div className="relative mx-auto grid max-w-250 grid-cols-1 items-start gap-10 px-5 pb-20 pt-32 md:grid-cols-[280px_1fr] md:px-20">
         <div
-          className="absolute left-3.75 top-24 mt-5 "
+          className="absolute left-3.75 top-22 md:top-24 md:mt-5 "
           onClick={() => navigate(-1)}
         >
           <img
