@@ -1,35 +1,15 @@
-:root {
-  --bg-main: #020617;
-  --bg-navbar: #020617;
-  --bg-card: #111827;
-  --bg-input: #1F2937;
-  --primary: #06B6D4;
-  --primary-light: #67E8F9;
-  --text-main: #FFFFFF;
-  --text-soft: #CBD5E1;
-  --border-light: rgba(255, 255, 255, 0.10);
-  --logout: #EF4444;
-  --bg-footer: #020617;
-  --border-footer: rgba(255, 255, 255, 0.10);
-}
+@import "tailwindcss";
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@theme {
+  --color-background: #020617;
+  --color-navbar: #020617;
+  --color-card: #111827;
+  --color-input: #1f2937;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-muted: #cbd5e1;
 
-body {
-  background-color: var(--bg-main);
-  color: var(--text-main);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+  --color-primary: #06b6d4;
+  --color-primary-light: #67e8f9;
 
-.custom-toast {
-  background: var(--bg-card);
-  color: var(--text-main);
-}
-
-.custom-progress {
-  background: var(--primary) !important;
+  --color-danger: #FF0E0E;
 }

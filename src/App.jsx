@@ -5,64 +5,79 @@ import SearchResults from "./pages/SearchResults/SearchResults.jsx";
 import MovieDetails from "./pages/MovieDetails/MovieDetails.jsx";
 import Auth from "./pages/Auth/Auth.jsx";
 import Footer from "./components/Footer/Footer.jsx";
-import { Routes, Route } from "react-router-dom";
-import { onAuthStateChanged } from "firebase/auth";
-import { Navigate } from "react-router-dom";
-import { auth } from "./firebase.js";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Favorites from "./pages/Favorites/Favorites.jsx";
+
+import { Routes, Route, Navigate } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase.js";
+
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const [user, setUser] = useState(null);
   const [authLoaded, setAuthLoaded] = useState(false);
 
-  const ProtectedRoute = ({ children, user }) => {
-    if (!user && authLoaded) {
+  const ProtectedRoute = ({ children }) => {
+    if (!authLoaded) {
+      return null;
+    }
+
+    if (!user) {
       return <Navigate to="/auth" replace />;
     }
+
     return children;
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
       setAuthLoaded(true);
     });
+
     return unsubscribe;
   }, []);
 
   return (
-    <div>
+    <div className="min-h-screen bg-background text-white">
       <ToastContainer
         position="top-right"
         autoClose={2000}
         theme="dark"
-        toastClassName="custom-toast"
-        progressClassName="custom-progress"
+        toastClassName="bg-card! text-white!"
+        progressClassName="bg-green-600!"
       />
+
       <Navbar user={user} authLoaded={authLoaded} />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/search"
-          element={
-            <ProtectedRoute user={user}>
-              <SearchResults user={user} />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="/movie/:id" element={<MovieDetails />} />
-        <Route
-          path="/favorites"
-          element={
-            <ProtectedRoute user={user}>
-              <Favorites user={user} />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="/auth" element={<Auth />} />
-      </Routes>
+
+      <main className="min-h-screen bg-linear-to-br from-background via-slate-900 to-black">
+        <Routes>
+          <Route path="/" element={<Home />} />
+
+          <Route
+            path="/search"
+            element={
+              <ProtectedRoute>
+                <SearchResults user={user} />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route path="/movie/:id" element={<MovieDetails />} />
+
+          <Route
+            path="/favorites"
+            element={
+              <ProtectedRoute>
+                <Favorites user={user} />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route path="/auth" element={<Auth />} />
+        </Routes>
+      </main>
+
       <Footer />
     </div>
   );

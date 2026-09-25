@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./MovieDetails.css";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import backIcon from "../../assets/circle-arrow-left.svg";
@@ -13,17 +12,17 @@ const MovieDetails = () => {
 
   function renderLoader() {
     return (
-      <div className="movie-details skeleton-container">
-        <div className="skeleton skeleton-poster"></div>
-        <div className="skeleton-content">
-          <div className="skeleton skeleton-title"></div>
-          <div className="skeleton skeleton-text"></div>
-          <div className="skeleton skeleton-text"></div>
-          <div className="skeleton skeleton-text"></div>
-          <div className="skeleton skeleton-text"></div>
-          <div className="skeleton skeleton-plot"></div>
-          <div className="skeleton skeleton-plot"></div>
-          <div className="skeleton skeleton-plot"></div>
+      <div className="relative mx-auto grid max-w-[1000px] grid-cols-1 items-start gap-10 bg-background px-5 pb-20 pt-28 md:grid-cols-[280px_1fr]">
+        <div className="h-[450px] w-full max-w-[300px] animate-pulse rounded-lg bg-gray-700"></div>
+        <div className="min-w-0">
+          <div className="mb-5 h-10 w-3/5 animate-pulse rounded-lg bg-gray-700"></div>
+          <div className="mb-[15px] h-5 w-2/5 animate-pulse rounded-lg bg-gray-700"></div>
+          <div className="mb-[15px] h-5 w-2/5 animate-pulse rounded-lg bg-gray-700"></div>
+          <div className="mb-[15px] h-5 w-2/5 animate-pulse rounded-lg bg-gray-700"></div>
+          <div className="mb-[15px] h-5 w-2/5 animate-pulse rounded-lg bg-gray-700"></div>
+          <div className="mb-3 h-5 w-[90%] animate-pulse rounded-lg bg-gray-700"></div>
+          <div className="mb-3 h-5 w-[90%] animate-pulse rounded-lg bg-gray-700"></div>
+          <div className="mb-3 h-5 w-[90%] animate-pulse rounded-lg bg-gray-700"></div>
         </div>
       </div>
     ) 
@@ -31,69 +30,69 @@ const MovieDetails = () => {
 
   function renderMovieDetails() {
     return (
-      <div className="movie-details">
-        <div className="back-icon" onClick={() => navigate(-1)}>
-          <img src={backIcon} alt="Back" />
+      <div className="relative mx-auto grid max-w-[1000px] grid-cols-1 items-start gap-10 px-5 pb-20 pt-32 md:grid-cols-[280px_1fr] md:px-20">
+        <div className="absolute left-[15px] top-24 mt-5" onClick={() => navigate(-1)}>
+          <img className="size-5 cursor-pointer invert" src={backIcon} alt="Back" />
         </div>
 
         {movie.Poster && movie.Poster !== "N/A" && (
           <img
             src={movie.Poster}
             alt={movie.Title}
-            className="movie-details-poster"
+            className="w-full rounded-xl shadow-[0_20px_60px_rgba(255,255,255,0.1)]"
           />
         )}
-        <div className="movie-details-content">
-          <h1>{movie.Title}</h1>
-          <p>
+        <div className="flex min-w-0 flex-col gap-3">
+          <h1 className="mb-2.5">{movie.Title}</h1>
+          <p className="leading-[1.6]">
             <strong>Year:</strong> {movie.Year}
           </p>
-          <p>
+          <p className="leading-[1.6]">
             <strong>Rated:</strong> {movie.Rated}
           </p>
-          <p>
+          <p className="leading-[1.6]">
             <strong>Runtime:</strong> {movie.Runtime}
           </p>
-          <p>
+          <p className="leading-[1.6]">
             <strong>Genre:</strong> {movie.Genre}
           </p>
-          <p>
+          <p className="leading-[1.6]">
             <strong>Director:</strong> {movie.Director}
           </p>
-          <p>
+          <p className="leading-[1.6]">
             <strong>Writer:</strong> {movie.Writer}
           </p>
-          <p>
+          <p className="leading-[1.6]">
             <strong>Actors:</strong> {movie.Actors}
           </p>
-          <p>
+          <p className="leading-[1.6]">
             <strong>Plot:</strong> {movie.Plot}
           </p>
-          <p>
+          <p className="leading-[1.6]">
             <strong>Language:</strong> {movie.Language}
           </p>
-          <p>
+          <p className="leading-[1.6]">
             <strong>Country:</strong> {movie.Country}
           </p>
-          <p>
+          <p className="leading-[1.6]">
             <strong>Awards:</strong> {movie.Awards}
           </p>
-          <p>
+          <p className="leading-[1.6]">
             <strong>Box Office:</strong> {movie.BoxOffice}
           </p>
-          <p>
+          <p className="leading-[1.6]">
             <strong>Metascore:</strong> {movie.Metascore}
           </p>
-          <p>
+          <p className="leading-[1.6]">
             <strong>IMDB Rating:</strong> {movie.imdbRating} ({movie.imdbVotes}{" "}
             votes)
           </p>
           {movie.Ratings && movie.Ratings.length > 0 && (
-            <div className="movie-details-ratings">
+            <div className="leading-[1.6]">
               <strong>Ratings:</strong>
-              <ul>
+              <ul className="mt-2.5 list-none p-0">
                 {movie.Ratings.map((rating) => (
-                  <li key={`${rating.Source}-${rating.Value}`}>
+                  <li className="mb-1.5" key={`${rating.Source}-${rating.Value}`}>
                     {rating.Source}: {rating.Value}
                   </li>
                 ))}

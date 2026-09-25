@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { signup, login } from "../../services/auth.js";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import loader from "../../assets/loader.svg";
-import "./Auth.css";
 
 const Auth = () => {
   const [signState, setSignState] = useState("Sign Up");
@@ -15,8 +14,8 @@ const Auth = () => {
 
   function renderLoader() {
     return (
-      <div className="login-spinner">
-        <img src={loader} alt="" />
+      <div className="flex min-h-screen items-center justify-center">
+        <img className="size-[60px]" src={loader} alt="" />
       </div>
     );
   }
@@ -40,12 +39,12 @@ const Auth = () => {
 
   function renderForm() {
     return (
-      <div className="login">
-        <div className="login-form">
-          <h1>{signState}</h1>
-          <form>
+      <div className="relative flex min-h-screen w-full items-center justify-center bg-[linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('/background.jpg')] bg-cover bg-center px-5 pb-10 pt-28">
+        <div className="my-10 w-full max-w-[450px] rounded-lg bg-card px-6 pb-10 pt-12 shadow-[0_4px_20px_rgba(0,0,0,0.5)] sm:px-[68px] sm:pt-[60px]">
+          <h1 className="mb-7 text-[32px] font-medium text-white">{signState}</h1>
+          <form className="flex flex-col gap-4">
             {signState === "Sign Up" ? (
-              <input
+              <input className="h-[50px] min-w-0 rounded border border-border bg-input px-5 py-4 text-base text-white outline-none placeholder:text-muted focus:border-primary"
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -54,27 +53,27 @@ const Auth = () => {
             ) : (
               <></>
             )}
-            <input
+            <input className="h-[50px] min-w-0 rounded border border-border bg-input px-5 py-4 text-base text-white outline-none placeholder:text-muted focus:border-primary"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
             />
-            <input
+            <input className="h-[50px] min-w-0 rounded border border-border bg-input px-5 py-4 text-base text-white outline-none placeholder:text-muted focus:border-primary"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
             />
-            <button onClick={user_auth} type="submit">
+            <button className="mt-6 h-[50px] cursor-pointer rounded bg-primary text-base font-medium text-white transition-colors duration-300 hover:bg-primary-light" onClick={user_auth} type="submit">
               {signState}
             </button>
           </form>
-          <div className="form-switch">
+          <div className="mt-10 text-center text-base text-muted">
             {signState === "Sign In" ? (
               <p>
-                New to Netflix?{" "}
-                <span
+                New to MoviePidia?{" "}
+                <span className="cursor-pointer font-medium text-white hover:underline"
                   onClick={() => {
                     setSignState("Sign Up");
                   }}
@@ -85,7 +84,7 @@ const Auth = () => {
             ) : (
               <p>
                 Already have accoung?{" "}
-                <span
+                <span className="cursor-pointer font-medium text-white hover:underline"
                   onClick={() => {
                     setSignState("Sign In");
                   }}
