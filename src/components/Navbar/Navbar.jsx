@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import logo from "../../assets/clapperboard.svg";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { logout } from "../../services/auth.js";
 import { Menu, X } from "lucide-react";
 
 const Navbar = ({ user, authLoaded }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const navLinkClassName = ({ isActive }) =>
+    `border-b-2 py-1 transition-colors ${
+      isActive
+        ? "border-primary text-primary"
+        : "border-transparent text-muted hover:text-primary-light"
+    }`;
 
   let authContent;
 
@@ -18,27 +25,37 @@ const Navbar = ({ user, authLoaded }) => {
     );
   } else if (user) {
     authContent = (
-      <>
-        <span>Welcome,</span>
+      <div className="flex flex-col md:flex-row  gap-4 items-start md:items-center justify-center">
+        <div className="flex gap-0.5 items-center justify-center">
+          <span className="text-base md:text-2xl">Welcome,</span>
 
-        <div className="group relative">
-          <span
-            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-border bg-input text-base text-muted"
-          >
-            {user.email[0].toUpperCase()}
-          </span>
+          <div className="group relative">
+            <span className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-border bg-input text-base text-muted">
+              {user.email[0].toUpperCase()}
+            </span>
 
-          <div className="absolute right-1/2 top-12 hidden translate-x-1/2 whitespace-nowrap rounded-md bg-card px-3 py-2 text-sm text-white group-hover:block">
-            {user.email}
+            <div className="absolute right-1/2 top-12 hidden translate-x-1/2 whitespace-nowrap rounded-md bg-card px-3 py-2 text-sm text-white group-hover:block">
+              {user.email}
+            </div>
           </div>
         </div>
 
-        <Link
+        <NavLink
+          to="/"
+          end
+          className={navLinkClassName}
+          onClick={() => setIsMenuOpen(false)}
+        >
+          Home
+        </NavLink>
+
+        <NavLink
           to="/favorites"
-          className="p-4 text-primary transition hover:text-primary-light"
+          className={navLinkClassName}
+          onClick={() => setIsMenuOpen(false)}
         >
           Favorites
-        </Link>
+        </NavLink>
 
         <button
           onClick={logout}
@@ -46,7 +63,7 @@ const Navbar = ({ user, authLoaded }) => {
         >
           Logout
         </button>
-      </>
+      </div>
     );
   } else {
     authContent = (
@@ -73,10 +90,7 @@ const Navbar = ({ user, authLoaded }) => {
       <div className="flex items-center gap-2.5">
         <img src={logo} alt="logo" />
 
-        <Link
-          to="/"
-          className="text-2xl font-bold text-white no-underline"
-        >
+        <Link to="/" className="text-2xl font-bold text-white no-underline">
           Movie<span className="text-primary">Pidia</span>
         </Link>
       </div>
